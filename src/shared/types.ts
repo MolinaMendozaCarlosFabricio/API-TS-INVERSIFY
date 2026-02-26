@@ -1,4 +1,5 @@
 export const TYPES = {
+    SocketIO: Symbol.for("SocketIO"),
     // Conector de MySQL
     ConnectionMySQL: Symbol.for("ConnectionMySQL"),
     // Users features ---------------------------------------------------------------
@@ -40,4 +41,13 @@ export const TYPES = {
     // SetAuctionCurrentPriceController: Symbol.for("SetAuctionCurrentPriceController"),
 
     // Bids features ---------------------------------------------------------------
+    // Interfaz de la DB
+    BidsDBRepository: Symbol.for("BidsDBRepository"),
+    // Interfaz del websocket
+    BidsSocketRepository: Symbol.for("BidsSocketRepository"),
+    // Feature GetBidsByAuction
+    GetBidsByAuctionUseCase: Symbol.for("GetBidsByAuctionUseCase"),
+    GetBidsByAuctionController: Symbol.for("GetBidsByAuctionController"),
+    // Feature EmitBid
+    EmitBidUseCase: Symbol.for("EmitBidUseCase")
 };

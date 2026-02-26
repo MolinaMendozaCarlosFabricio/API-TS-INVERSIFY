@@ -5,5 +5,5 @@ export interface AuctionsDBRepository {
     getAllAuctions(): Promise<Auction[]>
     getAuctionByID(id: number): Promise<Auction>
     setAuctionStatus(id: number, status: boolean): Promise<Auction>;
-    // setAuctionCurrentPrice(id: number, price: number): Promise<void>
+    setAuctionCurrentPrice(id: number, price: number): Promise<void>
 }

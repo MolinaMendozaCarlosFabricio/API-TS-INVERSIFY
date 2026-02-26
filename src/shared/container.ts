@@ -25,6 +25,13 @@ import { GetAuctionByIDController } from "../auctions/infrastructure/controllers
 import { GetAuctionByIDUseCase } from "../auctions/application/GetAuctionByID_useCase.js";
 import { SetAuctionStatusUseCase } from "../auctions/application/SetAuctionStatus_useCase.js";
 import { SetAuctionStatusController } from "../auctions/infrastructure/controllers/SetAuctionStatus_controller.js";
+import { BidsDBRepository } from "../bids/domain/repository/BidsDBRepository.js";
+import { BidsMySQLRepository } from "../bids/infrastructure/adapters/MySQLBidsImpl.js";
+import { GetBidsByAuctionUseCase } from "../bids/application/GetBidsByAuction_useCase.js";
+import { GetBidsByAuctionController } from "../bids/infrastructure/controllers/GetBidsByAuction_controller.js";
+import { BidsSocketRepository } from "../bids/domain/repository/BidsSocketRepository.js";
+import { BidsSocketAdapter } from "../bids/infrastructure/adapters/SocketIOBidsImpl.js";
+import { PlaceBidUseCase } from "../bids/application/EmitBid_useCase.js";
 
 export const container = new Container();
 
@@ -41,6 +48,13 @@ container.bind<UsersDBRepository>(TYPES.UsersDBRepository)
 // Implementación del repositorio de base de datos para subastas
 container.bind<AuctionsDBRepository>(TYPES.AuctionsDBRepository)
   .to(AbstractAuctionsMySQLRepository)
+
+// Implementación del repositorio de base de datos para bids
+container.bind<BidsDBRepository>(TYPES.BidsDBRepository)
+  .to(BidsMySQLRepository)
+
+container.bind<BidsSocketRepository>(TYPES.BidsSocketRepository)
+  .to(BidsSocketAdapter)
 
 // Users Features -------------------------------------------------------------------------------
 // RegisterUser
@@ -106,3 +120,15 @@ container.bind(TYPES.SetAuctionStatusUseCase)
 
 container.bind(TYPES.SetAuctionStatusController)
   .to(SetAuctionStatusController)
+
+// Bids features ----------------------------------------------------------
+// GetBidsByAuctions
+container.bind(TYPES.GetBidsByAuctionUseCase)
+  .to(GetBidsByAuctionUseCase)
+
+container.bind(TYPES.GetBidsByAuctionController)
+  .to(GetBidsByAuctionController)
+
+// EmitBids
+container.bind(TYPES.EmitBidUseCase)
+  .to(PlaceBidUseCase)

@@ -47,7 +47,8 @@ export class AbstractAuctionsMySQLRepository
   async getAllAuctions(): Promise<Auction[]> {
     const rows = await this.connection.fetchRows<RowDataPacket[]>(
       `SELECT id, title, current_price, end_time, status, created_at, user_id 
-       FROM auctions`,
+       FROM auctions 
+       ORDER BY created_at DESC`,
       []
     );
 
