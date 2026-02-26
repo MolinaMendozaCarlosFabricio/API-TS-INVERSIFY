@@ -5,7 +5,7 @@ export const BidSchema = z.object({
     auction_id: z.number(),
     user_id: z.number(),
     amount: z.coerce.number(),
-    created_at: z.string()
+    created_at: z.coerce.string()
 });
 
 export type Bid = z.infer<typeof BidSchema>
