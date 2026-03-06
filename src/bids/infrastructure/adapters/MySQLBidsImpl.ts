@@ -20,7 +20,7 @@ export class BidsMySQLRepository implements BidsDBRepository {
     async getBidsByAuction(auction_id: number): Promise<Bid[]> {
 
         const rows = await this.connection.fetchRows<RowDataPacket[]>(
-            `SELECT * FROM bids WHERE auction_id = ? ORDER BY amount DESC`,
+            `SELECT * FROM bids WHERE auction_id = ? ORDER BY amount ASC`,
             [auction_id]
         );
 
